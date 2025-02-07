@@ -4,6 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Articles, Components, Home, Profile, Register, Pro} from '../screens';
 import {useScreenOptions, useTranslation} from '../hooks/example';
 import MapScreen from '../screens/map/MapScreen';
+import { PermissionsScreen } from '../screens/permissions/PermissionsScreen';
 
 const Stack = createStackNavigator();
 
@@ -35,7 +36,7 @@ export default () => {
 
       <Stack.Screen 
         name="MapScreen" 
-        component={MapScreen}  
+        component={PermissionsScreen}  
       />
 
       <Stack.Screen
