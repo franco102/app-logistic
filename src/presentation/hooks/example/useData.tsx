@@ -31,7 +31,7 @@ export const DataProvider = ({children}: {children: React.ReactNode}) => {
   const [categories, setCategories] = useState<ICategory[]>(CATEGORIES);
   const [articles, setArticles] = useState<IArticle[]>(ARTICLES);
   const [article, setArticle] = useState<IArticle>({});
-
+  
   // get isDark mode from storage
   const getIsDark = useCallback(async () => {
     // get preferance gtom storage

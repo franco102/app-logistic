@@ -87,9 +87,11 @@ export const ASSETS: ThemeAssets = {
   // cards
   card1: require('../../assets/images/card1.png'),
   card2: require('../../assets/images/card2.png'),
-  card3: require('../../assets/images/card3.png'),
+  card3: require('../../assets/images/card3.png'), 
   card4: require('../../assets/images/card4.png'),
   card5: require('../../assets/images/card5.png'),
+  login: require('../../assets/images/login.png'),
+  user_login: require('../../assets/images/user_login.png'),
 
   // gallery photos
   photo1: require('../../assets/images/photo1.png'),

@@ -257,9 +257,11 @@ export interface ThemeAssets {
 
   card1: ImageSourcePropType;
   card2: ImageSourcePropType;
-  card3: ImageSourcePropType;
+  card3: ImageSourcePropType; 
   card4: ImageSourcePropType;
   card5: ImageSourcePropType;
+  login: ImageSourcePropType;
+  user_login: ImageSourcePropType;
 
   photo1: ImageSourcePropType;
   photo2: ImageSourcePropType;

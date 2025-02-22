@@ -11,12 +11,11 @@ const Articles = () => {
   const [articles, setArticles] = useState<IArticle[]>([]);
   const [categories, setCategories] = useState<ICategory[]>([]);
   const {colors, gradients, sizes} = useTheme();
-
+  console.log(data?.categories)
   // init articles
   useEffect(() => {
     setArticles(data?.articles);
-    setCategories(data?.categories);
-    setSelected(data?.categories[0]);
+    setCategories(data?.categories); 
   }, [data.articles, data.categories]);
 
   // update articles on category change

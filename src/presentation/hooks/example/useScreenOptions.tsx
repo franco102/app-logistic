@@ -4,7 +4,7 @@ import {
   StackHeaderProps ,
   CardStyleInterpolators,
 } from '@react-navigation/stack';
-import {useNavigation} from '@react-navigation/core';
+import {NavigationProp, useNavigation} from '@react-navigation/core';
 import {DrawerActions} from '@react-navigation/native'; 
 
 import {useData} from './useData';
@@ -15,36 +15,38 @@ import Text from '../../components/examples/Text';
 import useTheme from './useTheme';
 import Button from '../../components/examples/Button';
 import Block from '../../components/examples/Block';
+import { RootStacMapkParams } from '../../routes/Screens';
 
 export default () => {
   // const {t} = useTranslation();
   const {user} = useData();
-  const navigation = useNavigation();
+  const navigation =useNavigation<NavigationProp<RootStacMapkParams>>();
   const {icons, colors, gradients, sizes} = useTheme();
 
   const menu = {
-    headerStyle: {elevation: 0},
-    headerTitleAlign: 'left',
-    headerTitleContainerStyle: {marginLeft: -sizes.sm},
-    headerLeftContainerStyle: {paddingLeft: sizes.s},
+    headerStyle: {
+      elevation: 0,
+      backgroundColor: 'rgba(255, 255, 255, 0.7)', 
+      borderBottomWidth: 0,
+      borderBottomLeftRadius: 16,  
+      borderBottomRightRadius: 16, 
+    },
+    headerShown:true,
+    headerTransparent: true,
+    headerTitleContainerStyle: {marginLeft: -sizes.sm}, 
     headerRightContainerStyle: {paddingRight: sizes.s},
     cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-    // headerTitle: ({children}: StackHeaderProps) => (
-    //   <Text p>{children}</Text>
-    // ),
+    headerTitle: ({children}:{children:string}) => <Text p>{children}</Text>,
     headerLeft: () => (
       <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
         <Image source={icons.menu} radius={0} color={colors.icon} />
       </Button>
     ),
     headerRight: () => (
-      <Block row flex={0} align="center" marginRight={sizes.padding}>
+      <Block row flex={0}  align="center" marginRight={sizes.padding}>
         <TouchableOpacity
           style={{marginRight: sizes.sm}}
-          onPress={() =>({})
-            // navigation.navigate('Screens', {
-            //   screen: 'Pro',
-            // })
+          onPress={() =>navigation.navigate('Home' )
           }>
           <Image source={icons.bell} radius={0} color={colors.icon} />
           <Block
@@ -58,11 +60,8 @@ export default () => {
           />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() =>({})
-            // navigation.navigate('Screens', {
-            //   screen: 'Pro',
-            // })
-          }>
+          onPress={() =>navigation.navigate('Home' )
+        }>
           <Image source={icons.basket} radius={0} color={colors.icon} />
           <Block
             flex={0}
@@ -90,7 +89,7 @@ export default () => {
       ...menu,
       headerTitle: () => (
         <Text p white>
-          {/* {t('navigation.components')} */}
+          Componentes
         </Text>
       ),
       headerRight: () => null,
@@ -106,7 +105,7 @@ export default () => {
       headerTransparent: true,
       headerTitle: () => (
         <Text p white semibold>
-          {/* {t('pro.title')} */}
+          PRO
         </Text>
       ),
       headerRight: () => null,
@@ -139,10 +138,8 @@ export default () => {
         <Block row flex={0} align="center" marginRight={sizes.padding}>
           <TouchableOpacity
             style={{marginRight: sizes.sm}}
-            onPress={() =>({})
-              // navigation.navigate('Screens', {
-              //   screen: 'Notifications',
-              // })
+            onPress={() => 
+              navigation.navigate('MapScreen' )
             }>
             <Image source={icons.bell} radius={0} color={colors.icon} />
             <Block

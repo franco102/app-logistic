@@ -1,52 +1,38 @@
 import { useNavigation } from '@react-navigation/native';
-import { HomeScreen } from '../screens/home/HomeScreen';
-import { ProductScreen } from '../screens/products/ProductScreen';
-import { ProductsScreen } from '../screens/products/ProductsScreen';
-import { SettingsScreen } from '../screens/settings/SettingsScreen';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import LoginScreen from '../screens/login/LoginScreen';
+import Menu from './Menu';
+import { PermissionsChecker } from '../providers/PermissionsChecker';
 
 
-export type RootStackParams={
-  Home:undefined,
-  Products:undefined,
-  Product:{id:number,name:string},
-  Settings:undefined,
-  About:undefined,
+export type RootStackParams = {
+  Login: undefined,
+  DrawerNavigation: undefined,
 }
 
 const Stack = createStackNavigator<RootStackParams>();
 
-export const StackNavigator= ()=>  {
-  const navigator=useNavigation();
-
-  useEffect(()=>{
-    navigator.setOptions({
-      headerShow: false
-    })
-  },[])
-
-    return (
-      <Stack.Navigator 
-        screenOptions={{
-          headerStyle: {
-            // backgroundColor: '#f4511e',
-            elevation: 0, // for Android
-            shadowColor: 'transparent', // for Android
-          },
-          headerTintColor: 'black',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        }}
-      >
-        <Stack.Screen 
-          name="Home" component={HomeScreen} 
-          options={{ title: 'Home' }}
-        />
-        <Stack.Screen name="Products" component={ProductsScreen} />
-        <Stack.Screen name="Product" component={ProductScreen} />
-        <Stack.Screen name="Settings" component={SettingsScreen} />
-      </Stack.Navigator>
-    );
-  }
+export const StackNavigator = () => {
+  const navigator = useNavigation(); 
+  return ( 
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false ,
+            headerStyle: {
+              // backgroundColor: '#f4511e',
+              elevation: 0, // for Android
+              shadowColor: 'transparent', // for Android
+            },
+            headerTintColor: 'black',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+          initialRouteName="Login" 
+        >
+          <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login' }} />
+          <Stack.Screen name="DrawerNavigation" component={Menu} options={{ title: 'DrawerNavigation' }} />
+        </Stack.Navigator>  
+  );
+}

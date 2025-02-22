@@ -5,8 +5,23 @@ import {Articles, Components, Home, Profile, Register, Pro} from '../screens';
 import {useScreenOptions, useTranslation} from '../hooks/example';
 import MapScreen from '../screens/map/MapScreen';
 import { PermissionsScreen } from '../screens/permissions/PermissionsScreen';
+import LoginScreen from '../screens/login/LoginScreen';
 
-const Stack = createStackNavigator();
+
+export type RootStacMapkParams={
+  Home:undefined,
+  Components:undefined,
+  // Articles:{id:number,name:string},
+  Articles:undefined,
+  MapScreen:undefined,
+  Profile:undefined,
+  Register:undefined,
+  PermissionsScreen:undefined,
+  LoginScreen:undefined,
+}
+
+
+const Stack = createStackNavigator<RootStacMapkParams>();
 
 export default () => {
   // const {t} = useTranslation();
@@ -14,18 +29,26 @@ export default () => {
 
   return (
     <Stack.Navigator 
-    // screenOptions={screenOptions.stack}
+    screenOptions={screenOptions.stack}
     >
+      <Stack.Screen 
+        name="MapScreen" 
+        component={MapScreen}  
+      />
       <Stack.Screen
         name="Home"
         component={Home}
         options={{title: "Home"}}
       />
+      <Stack.Screen
+        name="LoginScreen"
+        component={LoginScreen}
+        options={{title: "Login"}}
+      />
 
       <Stack.Screen
         name="Components"
-        component={Components}
-        // options={screenOptions.components}
+        component={Components} 
       />
 
       <Stack.Screen
@@ -34,8 +57,9 @@ export default () => {
         options={{title: "Articles"}}
       />
 
+      
       <Stack.Screen 
-        name="MapScreen" 
+        name="PermissionsScreen" 
         component={PermissionsScreen}  
       />
 

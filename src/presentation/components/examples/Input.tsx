@@ -39,7 +39,7 @@ const Input = ({
   marginRight,
   marginLeft,
   onFocus,
-  onBlur,
+  onBlur, 
   ...props
 }: IInputProps) => {
   const {assets, colors, sizes} = useTheme();
@@ -146,6 +146,7 @@ const Input = ({
           placeholderTextColor={inputColor}
           onFocus={(event) => handleFocus(event, true)}
           onBlur={(event) => handleFocus(event, false)}
+          onChangeText={props.onChangeText}
         />
         {danger && assets.warning && (
           <Image

@@ -73,8 +73,7 @@ const DrawerContent = (
 
   const handleNavigation = useCallback(
     (to:any) => {
-      setActive(to);
-    //   navigation.navigate(to);
+      setActive(to); 
       navigation.navigate("Screens", { screen: to });
     },
     [navigation, setActive],
@@ -84,21 +83,22 @@ const DrawerContent = (
 
   // screen list for Drawer menu
   const screens = [
-    {name: "Home", to: 'Home', icon: assets.home},
-    {name: "Components", to: 'Components', icon: assets.components},
-    {name: "Articles", to: 'Articles', icon: assets.document},
-    {name: "Mapa", to: 'MapScreen', icon: assets.rental},
+    {name: "Mapa", to: 'MapScreen', icon: assets.settings},
     {name: "Profile", to: 'Profile', icon: assets.profile},
-    {name: "Settings", to: 'Pro', icon: assets.settings},
-    {name: "Register", to: 'Register', icon: assets.register},
-    {name: "Extra", to: 'Pro', icon: assets.extras},
+    {name: "Actividades", to: 'Home', icon: assets.home},
+    {name: "Components", to: 'Components', icon: assets.components},
+    // {name: "Login", to: 'LoginScreen', icon: assets.rental},
+    // {name: "Articles", to: 'Articles', icon: assets.document},
+    // {name: "Settings", to: 'Pro', icon: assets.settings},
+    // {name: "Register", to: 'Register', icon: assets.register},
+    // {name: "Extra", to: 'Pro', icon: assets.extras},
   ];
 
   return (
     <DrawerContentScrollView
       {...props}
       scrollEnabled
-      removeClippedSubviews
+      removeClippedSubviews 
       renderToHardwareTextureAndroid
       contentContainerStyle={{paddingBottom: sizes.padding}}>
       <Block paddingHorizontal={sizes.padding}>
@@ -163,7 +163,7 @@ const DrawerContent = (
         />
 
         <Text semibold transform="uppercase" opacity={0.5}>
-          {"t('menu.documentation')"}
+          Configuración
         </Text>
 
         <Button
@@ -219,12 +219,13 @@ export default () => {
     <Block gradient={gradients.light}>
       <Drawer.Navigator
         drawerContent={(props) => <DrawerContent {...props} />}
-        screenOptions={{
-            drawerType:"slide",
+          screenOptions={{
+          headerShown: false,
+            drawerType:"slide", 
             overlayColor:"transparent",  
             drawerStyle:{
               flex: 1,
-              width: '60%',
+              width: '55%',
               borderRightWidth: 0,
               backgroundColor: 'transparent',
             }
