@@ -23,7 +23,6 @@ export const HomeScreen = () => {
     <View style={globalStyles.container}>
       <PrimaryButton label='Productos' onPress={()=>navigator.navigate('Products')}/>
       <PrimaryButton label='Settings' onPress={()=>navigator.navigate('Settings')}/>
-      
     </View>
   )
 } 

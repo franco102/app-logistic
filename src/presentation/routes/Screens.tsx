@@ -5,7 +5,8 @@ import {Articles, Components, Home, Profile, Register, Pro} from '../screens';
 import {useScreenOptions, useTranslation} from '../hooks/example';
 import MapScreen from '../screens/map/MapScreen';
 import { PermissionsScreen } from '../screens/permissions/PermissionsScreen';
-import LoginScreen from '../screens/login/LoginScreen';
+import LoginScreen from '../screens/login/LoginScreen'; 
+import { ProfileScreen } from '../screens/home/ProfileScreen';
 
 
 export type RootStacMapkParams={
@@ -36,9 +37,9 @@ export default () => {
         component={MapScreen}  
       />
       <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{title: "Home"}}
+        name="Profile"
+        component={ProfileScreen}
+        options={{title: "Perfil",headerShown: false}} 
       />
       <Stack.Screen
         name="LoginScreen"
@@ -62,12 +63,7 @@ export default () => {
         name="PermissionsScreen" 
         component={PermissionsScreen}  
       />
-
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{headerShown: false}}
-      />
+ 
 
       <Stack.Screen
         name="Register"

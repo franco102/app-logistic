@@ -75,14 +75,15 @@ const MapScreen = () => {
                   angle={360}
                   width={120}
                   lineCap="round"
-                  accentColor="orange"
+                  accentColor={colors.facebook.toString()}
                 >
                   <Arc arcWidth={20} />
                   <Progress arcWidth={20} />
-                  <Indicator fixValue fontSize={60} fill="orange" y={65} textAnchor="middle" alignmentBaseline="middle" />
+                  <Indicator fixValue fontSize={60} fill={colors.facebook.toString()} y={65} textAnchor="middle" alignmentBaseline="middle" />
                 </Speedometer>
 
                 <Text style={{ textAlign: 'center', fontSize: 15 }} >Demora por neumatico </Text>
+                <Text style={{ textAlign: 'center', fontSize: 15,backgroundColor:colors.facebook,color:colors.white,fontWeight:700, borderRadius:10,paddingHorizontal:6,paddingVertical:4 }} >00:15:45 </Text>
               </Card.Content>
             </Card>
           </View>
@@ -114,26 +115,34 @@ const MapScreen = () => {
           <FAB.Group
             open={open}
             visible
-            icon={props => <IonIcon size={25} name={(open ? 'close-circle-outline' : 'add-circle-outline')} />}
+            icon={props => <IonIcon size={25} name={(open ? 'close-circle-outline' : 'add-circle-outline')}  color={colors.white.toString()}/>}
             actions={[
               {
-                icon: props => <IonIcon name='notifications-outline' />,
+                icon: props => <IonIcon name='notifications-outline' color={colors.white.toString()} />,
+                style:{backgroundColor:colors.facebook,},
                 label: 'Actividad',
+                labelStyle:{backgroundColor:colors.facebook,color:colors.white,padding:2,borderRadius:5},
                 onPress: () => setDisplayActivities((sate) => sate ? undefined : 'none')
               },
               {
-                icon: props => <IonIcon name='layers-outline' />,
+                icon: props => <IonIcon name='layers-outline' color={colors.white.toString()} />,
+                style:{backgroundColor:colors.facebook,},
                 label: 'Rutas',
+                labelStyle:{backgroundColor:colors.facebook,color:colors.white,padding:2,borderRadius:5},
                 onPress: () => setDisplayRoutes((sate) => sate ? undefined : 'none')
               },
               {
-                icon: props => <IonIcon name='map-sharp' />,
+                icon: props => <IonIcon name='map-sharp' color={colors.white.toString()} />,
+                style:{backgroundColor:colors.facebook,},
                 label: 'Mapa',
+                labelStyle:{backgroundColor:colors.facebook,color:colors.white,padding:2,borderRadius:5},
                 onPress: () => <IonIcon name='share-social-outline' />,
               },
               {
-                icon: props => <IonIcon name='disc-outline' />,
+                icon: props => <IonIcon name='disc-outline'  color={colors.white.toString()} />,
+                style:{backgroundColor:colors.facebook,},
                 label: 'Ubicame',
+                labelStyle:{backgroundColor:colors.facebook,color:colors.white,padding:2,borderRadius:5},
                 onPress: () => <IonIcon name='add' />
               },
             ]}
@@ -144,8 +153,7 @@ const MapScreen = () => {
               }
             }}
             backdropColor='transparent'
-            // fabStyle={{backgroundColor:gradients.primary?.toString()}}
-
+            fabStyle={{backgroundColor:colors.facebook}} 
           /> 
           <View style={{ position: 'absolute', bottom: 0, left: 0, paddingRight: 5, paddingBottom: 5 }}>
             <Speedometer
@@ -155,8 +163,8 @@ const MapScreen = () => {
             >
               <Background />
               <Arc />
-              <Needle circleRadius={10} circleColor={colors.primary.toString()} baseOffset={10} />
-              <Progress color={colors.primary.toString()} />
+              <Needle circleRadius={10} circleColor={colors.facebook.toString()} baseOffset={10} />
+              <Progress color={colors.facebook.toString()}/>
               <Marks fontSize={15} step={15} />
               <Indicator fixValue fontSize={20} />
             </Speedometer>

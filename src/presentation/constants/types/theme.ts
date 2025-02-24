@@ -273,6 +273,8 @@ export interface ThemeAssets {
 
   avatar1: ImageSourcePropType;
   avatar2: ImageSourcePropType;
+  dirver: ImageSourcePropType;
+  auxiliar: ImageSourcePropType;
 
   x5: ImageSourcePropType;
   gle: ImageSourcePropType;
