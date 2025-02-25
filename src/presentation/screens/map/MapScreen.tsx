@@ -15,6 +15,11 @@ import { IonIcon } from '../../components/shared/IonIcon';
 import { Button } from '../../components/examples';
 import { useTheme } from '../../hooks/example';
 import { ProgressBar, MD3Colors, Portal, FAB, List, Card } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { RootParamList } from '../../routes/Menu';
+
+type NavigationProps = DrawerNavigationProp<RootParamList>;
 
 const MapScreen = () => {
   const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
@@ -24,6 +29,7 @@ const MapScreen = () => {
   useEffect(() => {
     setLocation({ latitude: -11.878861419502057, longitude: -77.02969132984346 })
   }, []);
+  const navigation = useNavigation<NavigationProps>();
   const { assets, colors, gradients, sizes } = useTheme();
   const getCurrentLocation = () => {
     Geolocation.getCurrentPosition(
@@ -45,7 +51,7 @@ const MapScreen = () => {
   const { open } = state;
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container}> 
       {location ? (
         <View style={{ flex: 1 }}>
           <MapView
@@ -83,7 +89,7 @@ const MapScreen = () => {
                 </Speedometer>
 
                 <Text style={{ textAlign: 'center', fontSize: 15 }} >Demora por neumatico </Text>
-                <Text style={{ textAlign: 'center', fontSize: 15,backgroundColor:colors.facebook,color:colors.white,fontWeight:700, borderRadius:10,paddingHorizontal:6,paddingVertical:4 }} >00:15:45 </Text>
+                <Text style={{ textAlign: 'center', fontSize: 15, backgroundColor: colors.facebook, color: colors.white, fontWeight: 700, borderRadius: 10, paddingHorizontal: 6, paddingVertical: 4 }} >00:15:45 </Text>
               </Card.Content>
             </Card>
           </View>
@@ -115,34 +121,41 @@ const MapScreen = () => {
           <FAB.Group
             open={open}
             visible
-            icon={props => <IonIcon size={25} name={(open ? 'close-circle-outline' : 'add-circle-outline')}  color={colors.white.toString()}/>}
+            icon={props => <IonIcon size={25} name={(open ? 'close-circle-outline' : 'add-circle-outline')} color={colors.white.toString()} />}
             actions={[
               {
+                icon: props => <IonIcon name='menu-outline' color={colors.white.toString()} />,
+                style: { backgroundColor: colors.facebook, },
+                label: 'Menu',
+                labelStyle: { backgroundColor: colors.facebook, color: colors.white, padding: 2, borderRadius: 5 },
+                onPress: () => navigation.toggleDrawer()
+              },
+              {
                 icon: props => <IonIcon name='notifications-outline' color={colors.white.toString()} />,
-                style:{backgroundColor:colors.facebook,},
+                style: { backgroundColor: colors.facebook, },
                 label: 'Actividad',
-                labelStyle:{backgroundColor:colors.facebook,color:colors.white,padding:2,borderRadius:5},
+                labelStyle: { backgroundColor: colors.facebook, color: colors.white, padding: 2, borderRadius: 5 },
                 onPress: () => setDisplayActivities((sate) => sate ? undefined : 'none')
               },
               {
                 icon: props => <IonIcon name='layers-outline' color={colors.white.toString()} />,
-                style:{backgroundColor:colors.facebook,},
+                style: { backgroundColor: colors.facebook, },
                 label: 'Rutas',
-                labelStyle:{backgroundColor:colors.facebook,color:colors.white,padding:2,borderRadius:5},
+                labelStyle: { backgroundColor: colors.facebook, color: colors.white, padding: 2, borderRadius: 5 },
                 onPress: () => setDisplayRoutes((sate) => sate ? undefined : 'none')
               },
               {
                 icon: props => <IonIcon name='map-sharp' color={colors.white.toString()} />,
-                style:{backgroundColor:colors.facebook,},
+                style: { backgroundColor: colors.facebook, },
                 label: 'Mapa',
-                labelStyle:{backgroundColor:colors.facebook,color:colors.white,padding:2,borderRadius:5},
+                labelStyle: { backgroundColor: colors.facebook, color: colors.white, padding: 2, borderRadius: 5 },
                 onPress: () => <IonIcon name='share-social-outline' />,
               },
               {
-                icon: props => <IonIcon name='disc-outline'  color={colors.white.toString()} />,
-                style:{backgroundColor:colors.facebook,},
+                icon: props => <IonIcon name='disc-outline' color={colors.white.toString()} />,
+                style: { backgroundColor: colors.facebook, },
                 label: 'Ubicame',
-                labelStyle:{backgroundColor:colors.facebook,color:colors.white,padding:2,borderRadius:5},
+                labelStyle: { backgroundColor: colors.facebook, color: colors.white, padding: 2, borderRadius: 5 },
                 onPress: () => <IonIcon name='add' />
               },
             ]}
@@ -153,8 +166,8 @@ const MapScreen = () => {
               }
             }}
             backdropColor='transparent'
-            fabStyle={{backgroundColor:colors.facebook}} 
-          /> 
+            fabStyle={{ backgroundColor: colors.facebook }}
+          />
           <View style={{ position: 'absolute', bottom: 0, left: 0, paddingRight: 5, paddingBottom: 5 }}>
             <Speedometer
               value={kilometers}
@@ -164,7 +177,7 @@ const MapScreen = () => {
               <Background />
               <Arc />
               <Needle circleRadius={10} circleColor={colors.facebook.toString()} baseOffset={10} />
-              <Progress color={colors.facebook.toString()}/>
+              <Progress color={colors.facebook.toString()} />
               <Marks fontSize={15} step={15} />
               <Indicator fixValue fontSize={20} />
             </Speedometer>

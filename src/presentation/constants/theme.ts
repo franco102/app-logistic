@@ -108,6 +108,11 @@ export const ASSETS: ThemeAssets = {
   dirver: require('../../assets/vehicle/conductor.png'),
   auxiliar: require('../../assets/vehicle/auxiliar.png'),
 
+  camion: require('../../assets/vehicle/camion.png'),
+  camionCarga: require('../../assets/vehicle/camion_carga.png'),
+  moto: require('../../assets/vehicle/moto.png'),
+  truck: require('../../assets/vehicle/truck.png'), 
+
   // cars
   x5: require('../../assets/images/x5.png'),
   gle: require('../../assets/images/gle.png'),

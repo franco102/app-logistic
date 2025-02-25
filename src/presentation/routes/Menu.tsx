@@ -12,7 +12,11 @@ import {Block, Text, Switch, Button, Image} from '../components/examples';
 import {useData, useTheme, useTranslation} from '../hooks/example';
 import Screens from './Screens';
 
-const Drawer = createDrawerNavigator();
+export type RootParamList = {
+  Screens: undefined; 
+
+};
+const Drawer = createDrawerNavigator<RootParamList>();
 
 /* drawer menu screens navigation */
 const ScreensStack = () => {
@@ -64,9 +68,7 @@ const ScreensStack = () => {
 const DrawerContent = (
   props: DrawerContentComponentProps,
 ) => {
-  const {navigation} = props;
-//   const {t} = useTranslation();
-  const {isDark, handleIsDark} = useData();
+  const {navigation} = props; 
   const [active, setActive] = useState('Home');
   const {assets, colors, gradients, sizes} = useTheme();
   const labelColor = colors.text;
@@ -85,13 +87,8 @@ const DrawerContent = (
   const screens = [
     {name: "Mapa", to: 'MapScreen', icon: assets.settings},
     {name: "Profile", to: 'Profile', icon: assets.profile},
-    {name: "Actividades", to: 'Home', icon: assets.home},
-    {name: "Components", to: 'Components', icon: assets.components},
-    // {name: "Login", to: 'LoginScreen', icon: assets.rental},
-    // {name: "Articles", to: 'Articles', icon: assets.document},
-    // {name: "Settings", to: 'Pro', icon: assets.settings},
-    // {name: "Register", to: 'Register', icon: assets.register},
-    // {name: "Extra", to: 'Pro', icon: assets.extras},
+    {name: "Actividades", to: 'Activities', icon: assets.home},
+    {name: "Components", to: 'Components', icon: assets.components} 
   ];
 
   return (
@@ -152,60 +149,7 @@ const DrawerContent = (
               </Text>
             </Button>
           );
-        })}
-
-        <Block
-          flex={0}
-          height={1}
-          marginRight={sizes.md}
-          marginVertical={sizes.sm}
-          gradient={gradients.menu}
-        />
-
-        <Text semibold transform="uppercase" opacity={0.5}>
-          Configuración
-        </Text>
-
-        <Button
-          row
-          justify="flex-start"
-          marginTop={sizes.sm}
-          marginBottom={sizes.s}
-          onPress={() =>
-            handleWebLink('https://github.com/creativetimofficial')
-          }>
-          <Block
-            flex={0}
-            radius={6}
-            align="center"
-            justify="center"
-            width={sizes.md}
-            height={sizes.md}
-            marginRight={sizes.s}
-            gradient={gradients.white}>
-            <Image
-              radius={0}
-              width={14}
-              height={14}
-              color={colors.black}
-              source={assets.documentation}
-            />
-          </Block>
-          <Text p color={labelColor}>
-            Document
-          </Text>
-        </Button>
-
-        <Block row justify="space-between" marginTop={sizes.sm}>
-          <Text color={labelColor}>Dark</Text>
-          <Switch
-            checked={isDark}
-            // onPress={(checked) => {
-            //   handleIsDark(checked);
-            //   Alert.aler"t(t('pro.title')", "t('pro.alert'))";
-            // }}
-          />
-        </Block>
+        })} 
       </Block>
     </DrawerContentScrollView>
   );

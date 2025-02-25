@@ -276,6 +276,11 @@ export interface ThemeAssets {
   dirver: ImageSourcePropType;
   auxiliar: ImageSourcePropType;
 
+  camionCarga: ImageSourcePropType;
+  camion: ImageSourcePropType;
+  moto: ImageSourcePropType;
+  truck: ImageSourcePropType;
+
   x5: ImageSourcePropType;
   gle: ImageSourcePropType;
   tesla: ImageSourcePropType;

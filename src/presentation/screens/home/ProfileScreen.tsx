@@ -1,44 +1,19 @@
-import React, { useCallback } from 'react';
-import { Platform, Linking } from 'react-native';
-import { useNavigation } from '@react-navigation/core';
-
+import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { Block, Button, Image, Text } from '../../components/examples';
-import { useData, useTheme, useTranslation } from '../../hooks/example';
+import { useTheme } from '../../hooks/example';
 import { IonIcon } from '../../components/shared/IonIcon';
-
-import { View, StyleSheet, Image as ImagePaper } from 'react-native';
-import { Card, Title, Paragraph, Text as TextPaper, Avatar } from 'react-native-paper';
-import { colors } from '../../theme/theme';
+import { View, StyleSheet } from 'react-native';
+import { Card, Title, Paragraph, Avatar } from 'react-native-paper';
 import { CarouselAuxiliar } from '../../components/profile/CarouselAuxiliar';
+import { RootParamList } from '../../routes/Menu';
+ 
+type NavigationProps = DrawerNavigationProp<RootParamList>;
 
 export const ProfileScreen = () => {
-    const { user } = useData();
-    // const {t} = useTranslation();
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavigationProps>();
     const { assets, colors, sizes } = useTheme();
-
-    const IMAGE_SIZE = (sizes.width - (sizes.padding + sizes.sm) * 2) / 3;
-    const IMAGE_VERTICAL_SIZE =
-        (sizes.width - (sizes.padding + sizes.sm) * 2) / 2;
-    const IMAGE_MARGIN = (sizes.width - IMAGE_SIZE * 3 - sizes.padding * 2) / 2;
-    const IMAGE_VERTICAL_MARGIN =
-        (sizes.width - (IMAGE_VERTICAL_SIZE + sizes.sm) * 2) / 2;
-
-    const handleSocialLink = useCallback(
-        (type: 'twitter' | 'dribbble') => {
-            const url =
-                type === 'twitter'
-                    ? `https://twitter.com/${user?.social?.twitter}`
-                    : `https://dribbble.com/${user?.social?.dribbble}`;
-
-            try {
-                Linking.openURL(url);
-            } catch (error) {
-                // alert(`Cannot open URL: ${url}`);
-            }
-        },
-        [user],
-    );
 
     return (
         <Block safe marginTop={sizes.md}>
@@ -58,40 +33,65 @@ export const ProfileScreen = () => {
 
                         <Card style={styles.card}>
                             <Card.Content>
-                                <View style={styles.profileHeader}>
+
+                                <View
+                                    style={{
+                                        ...styles.vehicleInfo,
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
+                                        marginTop: 20,
+                                        backgroundColor: 'rgba(253, 253, 253, 0.2)',
+                                        padding: 10,
+                                        borderRadius: 50
+                                    }}>
                                     <Button
-                                        row
-                                        flex={0}
-                                        justify="flex-start"
-                                        onPress={() => navigation.goBack()}>
-                                        <Image
-                                            radius={0}
-                                            width={10}
-                                            height={18}
-                                            color={colors.black}
-                                            source={assets.arrow}
-                                            transform={[{ rotate: '180deg' }]}
-                                        />
+                                        color={colors.facebook}
+                                        radius={50}
+                                        width={4}
+                                        style={{ width: 2, position: 'absolute', top: -15, right: -5 }}
+                                        onPress={() => navigation.toggleDrawer()}>
+                                        <IonIcon name='menu-outline' color={colors.white.toString()} />
                                     </Button>
                                     <Avatar.Image
-                                        source={{ uri: 'https://via.placeholder.com/150' }}
+                                        style={{backgroundColor:'transparent'}}
+                                        source={assets.dirver}
                                         size={80}
                                     />
-                                    <View style={styles.profileInfo}>
+                                    <View style={{ display: 'flex', flex:1, justifyContent: 'flex-start', alignItems: 'flex-start',paddingLeft:10 }} >
                                         <Title>John Doe</Title>
-                                        <Paragraph>Conductor Principal</Paragraph>
+                                        <Paragraph>DNI: 72696073</Paragraph>
                                     </View>
                                 </View>
-                                <View style={styles.vehicleInfo}>
-                                    <Title>Información del Vehículo</Title>
-                                    <Paragraph>Marca: Toyota</Paragraph>
-                                    <Paragraph>Modelo: Corolla</Paragraph>
-                                    <Paragraph>Placa: ABC-123</Paragraph>
-                                    <Paragraph>Color: Rojo</Paragraph>
+                                <View style={{
+                                        ...styles.vehicleInfo,
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between', 
+                                        backgroundColor: 'rgba(253, 253, 253, 0.2)',
+                                        padding: 10,
+                                        borderRadius: 50
+                                    }}>
+                                    <Avatar.Image
+                                        style={{backgroundColor:'transparent'}}
+                                        source={assets.moto}
+                                        size={80}
+                                    />
+                                    <View style={{ display: 'flex', flex:1, justifyContent: 'flex-start',paddingLeft:10 }}>
+                                        <View style={{ display: 'flex', flexDirection:'row', justifyContent: 'space-between',marginHorizontal:10 }}>
+                                            <Paragraph style={{backgroundColor:colors.facebook,borderRadius:10, paddingHorizontal:10,color:colors.white,fontWeight:700}}>Toyota</Paragraph>
+                                            <Paragraph style={{backgroundColor:colors.facebook,borderRadius:10, paddingHorizontal:10,color:colors.white,fontWeight:700}}>Corolla</Paragraph>
+                                        </View>
+                                        <View style={{ display: 'flex', flexDirection:'row', justifyContent: 'space-between',marginHorizontal:10 }}>
+                                            <Paragraph style={{backgroundColor:colors.facebook,borderRadius:10, paddingHorizontal:10,color:colors.white,fontWeight:700}}>ABC-123</Paragraph>
+                                            <Paragraph style={{backgroundColor:colors.facebook,borderRadius:10, paddingHorizontal:10,color:colors.white,fontWeight:700}}>Rojo</Paragraph>
+                                        </View>
+                                    </View>
                                 </View>
-                                <View style={styles.assistantInfo} >
-                                    <Title style={{textAlign:'center'}}>Asistentes</Title>
-                                    <CarouselAuxiliar/> 
+                                <View style={styles.assistantInfo} > 
+                                    <CarouselAuxiliar />
                                 </View>
                             </Card.Content>
                         </Card>
@@ -106,8 +106,7 @@ export const ProfileScreen = () => {
                         </Text>
                         <Block
                             flex={0}
-                            radius={sizes.sm}
-                            // shadow={!isAndroid}   
+                            radius={sizes.sm}  
                             color="rgba(41, 31, 31, 0.2)">
                             <Block
                                 row
@@ -148,7 +147,7 @@ export const ProfileScreen = () => {
                                         radius={sizes.m}
                                         paddingHorizontal={sizes.m}
                                         color="rgba(255,255,255,0.2)">
-                                        <Text white bold transform="uppercase">
+                                        <Text black bold transform="uppercase">
                                             FSILVA
                                         </Text>
                                     </Block>
@@ -159,7 +158,7 @@ export const ProfileScreen = () => {
                                     marginHorizontal={sizes.sm}
                                     color="rgba(255,255,255,0.2)"
                                     outlined={String(colors.white)}
-                                    onPress={() => handleSocialLink('twitter')}>
+                                    onPress={() => ({})}>
                                     <IonIcon
                                         size={18}
                                         name="map-outline"
@@ -171,7 +170,7 @@ export const ProfileScreen = () => {
                                     radius={sizes.m}
                                     color="rgba(255,255,255,0.2)"
                                     outlined={String(colors.white)}
-                                    onPress={() => handleSocialLink('dribbble')}>
+                                    onPress={() => ({})}>
                                     <IonIcon
                                         size={18}
                                         name="alert-circle-outline"
@@ -207,6 +206,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 16,
+        color: 'white'
     },
     profileInfo: {
         marginLeft: 16,
@@ -216,9 +216,9 @@ const styles = StyleSheet.create({
     },
     assistantInfo: {
         marginTop: 16,
-        backgroundColor:'rgba(255, 255, 255, 0.37)',
-        padding:5,
-        borderRadius:15
+        backgroundColor: 'rgba(253, 253, 253, 0.2)',
+        padding: 5,
+        borderRadius: 15
     },
     assitantProfile: {
         flexDirection: 'row',

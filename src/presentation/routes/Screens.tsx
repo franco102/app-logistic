@@ -7,13 +7,14 @@ import MapScreen from '../screens/map/MapScreen';
 import { PermissionsScreen } from '../screens/permissions/PermissionsScreen';
 import LoginScreen from '../screens/login/LoginScreen'; 
 import { ProfileScreen } from '../screens/home/ProfileScreen';
+import ActivitiesScreen from '../screens/activities/ActivitiesScreen';
 
 
 export type RootStacMapkParams={
   Home:undefined,
   Components:undefined,
   // Articles:{id:number,name:string},
-  Articles:undefined,
+  Activities:undefined,
   MapScreen:undefined,
   Profile:undefined,
   Register:undefined,
@@ -34,6 +35,7 @@ export default () => {
     >
       <Stack.Screen 
         name="MapScreen" 
+        options={{headerShown: false}}
         component={MapScreen}  
       />
       <Stack.Screen
@@ -53,9 +55,9 @@ export default () => {
       />
 
       <Stack.Screen
-        name="Articles"
-        component={Articles}
-        options={{title: "Articles"}}
+        name="Activities"
+        component={ActivitiesScreen}
+        options={{title: "Actividades"}}
       />
 
       
